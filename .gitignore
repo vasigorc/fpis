@@ -1,0 +1,18 @@
+# ignore idea files
+*.iml
+**/.idea
+
+# any targets
+**/target
+
+# ignore .travis.yml
+.travis.yml
+.gitignore
+.directory
+
+# ignore eclipse files
+*.cache-main
+*.cache-tests
+*.classpath
+*.project
+**/.settings
