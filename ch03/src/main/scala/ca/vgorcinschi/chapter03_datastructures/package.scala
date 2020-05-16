@@ -26,7 +26,7 @@ package object chapter03_datastructures {
     def helper(asRemainder: List[A], acc: B): B = asRemainder match {
       case Nil => acc
       case x::Nil => f(acc, x)
-      case x::xs => helper(xs, acc)
+      case x::xs => helper(xs, f(acc, x))
     }
 
     helper(as, z)
