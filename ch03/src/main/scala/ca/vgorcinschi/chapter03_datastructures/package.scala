@@ -31,4 +31,10 @@ package object chapter03_datastructures {
 
     helper(as, z)
   }
+
+  /**
+   * Exercise 3.12
+   * Write a function that returns the reverse of a list. See if you can write it using a fold.
+   */
+  def reverse[A](as: List[A]): List[A] = foldLeft(as, List[A]())((acc, elem) => elem::acc)
 }
