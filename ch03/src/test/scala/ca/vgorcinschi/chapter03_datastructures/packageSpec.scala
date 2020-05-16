@@ -3,7 +3,7 @@ package ca.vgorcinschi.chapter03_datastructures
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
-class DataStructuresSpec extends AnyFlatSpec with Matchers{
+class packageSpec extends AnyFlatSpec with Matchers{
 
   trait NonEmptyCharListFixture {
     val charList: List[Char] = List[Char]('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i')
@@ -58,5 +58,34 @@ class DataStructuresSpec extends AnyFlatSpec with Matchers{
 
   it should "return Nil for Nil input" in {
     reverse(Nil) should equal(Nil)
+  }
+
+  behavior of "foldLeftViaFoldRight"
+
+  it should "return start value for an empty list" in new EmptyCharListFixture {
+    foldLeftViaFoldRight(charList, 0L)(_ + _) should equal(0L)
+  }
+
+  it should "correctly compute the accumulation" in new NonEmptyCharListFixture {
+    foldLeftViaFoldRight(charList, "")((acc, elem) => acc + elem) should equal(charList.mkString)
+  }
+
+  behavior of "foldRightViaFoldLeft"
+
+  it should "return start value for an empty list" in new EmptyCharListFixture {
+    foldRightViaFoldLeft(charList, 0L)(_ + _) should equal(0L)
+  }
+
+  it should "correctly compute the accumulation" in new NonEmptyCharListFixture {
+    foldRightViaFoldLeft(charList, "")((acc, elem) => acc + elem) should equal(charList.mkString)
+  }
+
+  /**
+   * @note that invoking [[foldRight()]] on the same
+   *       input does throw a [[StackOverflowError]]
+   */
+  it should "not throw StackOverFlow for a large passed-in list" in {
+    val largeList = List.fill(1_000_000)(0.toByte)
+    foldRightViaFoldLeft(largeList, 1)(_ & _) should equal(0)
   }
 }
