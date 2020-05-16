@@ -88,4 +88,16 @@ class packageSpec extends AnyFlatSpec with Matchers{
     val largeList = List.fill(1_000_000)(0.toByte)
     foldRightViaFoldLeft(largeList, 1)(_ & _) should equal(0)
   }
+
+  behavior of "append"
+
+  it should "append an element to the end of non empty list" in new NonEmptyCharListFixture {
+    val result: List[Char] = append(charList, 'z')
+    result.last should equal('z')
+    result.size should equal(charList.size + 1)
+  }
+
+  it should "return a list of a single element when passed-in an empty list" in new EmptyCharListFixture {
+    append(charList, 'z') should equal(List('z'))
+  }
 }

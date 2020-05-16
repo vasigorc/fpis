@@ -51,4 +51,12 @@ package object chapter03_datastructures {
   def foldRightViaFoldLeft[A,B](as: List[A], z: B)(f: (A, B) => B): B = {
     foldLeft(reverse(as), z)((b, a) => f(a, b))
   }
+
+  /**
+   * Exercise 3.14
+   * Implement append in terms of either [[foldLeft()]] or [[foldRight()]]
+   */
+  def append[A](as: List[A], appended: A): List[A] = {
+    foldLeft(reverse(as), List(appended))((acc, elem) => elem::acc)
+  }
 }
