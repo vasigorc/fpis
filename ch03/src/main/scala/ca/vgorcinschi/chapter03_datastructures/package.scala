@@ -79,4 +79,11 @@ package object chapter03_datastructures {
   def map[A,B](as: List[A])(f: A => B): List[B] = {
     foldRightViaFoldLeft(as, List[B]())((elem, acc) => f(elem)::acc)
   }
+
+  /**
+   * Exercise 3.20
+   * Write a function flatMap that works like [[map()]] except that the function given will return
+   * a list instead of a single result, and that list should be inserted into the final resulting list
+   */
+  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = concatAll(map(as)(f))
 }
