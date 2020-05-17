@@ -118,4 +118,10 @@ class packageSpec extends AnyFlatSpec with Matchers{
     val uppercased: List[String] = map(charList)(f)
     uppercased should equal(charList.map(f))
   }
+
+  behavior of "flatMap"
+
+  it should "flatten the list after applied function" in {
+    flatMap(List(1,2,3))(i => List(i, i)) should equal(List(1,1,2,2,3,3))
+  }
 }
