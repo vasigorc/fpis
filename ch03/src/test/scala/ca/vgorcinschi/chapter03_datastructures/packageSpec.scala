@@ -110,4 +110,12 @@ class packageSpec extends AnyFlatSpec with Matchers{
     val result: List[Char] = concatAll(List(list1, list2, list3))
     result should equal(List[Char]('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'))
   }
+
+  behavior of "map"
+
+  it should "transform chars in a list to uppercase Strings" in new NonEmptyCharListFixture {
+    private val f: Char => String = character => character.toString.toUpperCase
+    val uppercased: List[String] = map(charList)(f)
+    uppercased should equal(charList.map(f))
+  }
 }

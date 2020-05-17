@@ -57,7 +57,7 @@ package object chapter03_datastructures {
    * Implement append in terms of either [[foldLeft()]] or [[foldRight()]]
    */
   def append[A](as: List[A], appended: A): List[A] = {
-    foldLeft(reverse(as), List(appended))((acc, elem) => elem :: acc)
+    foldRightViaFoldLeft(as, List(appended))((elem, acc) => elem :: acc)
   }
 
   /**
@@ -67,7 +67,16 @@ package object chapter03_datastructures {
    * defined
    */
   def concatAll[A](lists: List[List[A]]): List[A] = {
-    foldLeft(reverse(lists), List[A]())((acc, list) =>
-      foldLeft(reverse(list), acc)((acc2, elem) => elem :: acc2))
+    foldRightViaFoldLeft(lists, List[A]())((list, acc) =>
+      foldRightViaFoldLeft(list, acc)((elem, acc2) => elem :: acc2))
+  }
+
+  /**
+   * Exercise 3.18
+   * Write a function map that generalizes modifying each element in a list while
+   * maintaining the structure of the list.
+   */
+  def map[A,B](as: List[A])(f: A => B): List[B] = {
+    foldRightViaFoldLeft(as, List[B]())((elem, acc) => f(elem)::acc)
   }
 }
