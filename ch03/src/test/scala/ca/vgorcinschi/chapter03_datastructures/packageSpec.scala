@@ -100,4 +100,14 @@ class packageSpec extends AnyFlatSpec with Matchers{
   it should "return a list of a single element when passed-in an empty list" in new EmptyCharListFixture {
     append(charList, 'z') should equal(List('z'))
   }
+
+  behavior of "concatAll"
+
+  it should "concat three lists in the order that they were passed-in" in {
+    val list1 = List[Char]('a', 'b', 'c')
+    val list2 = List[Char]('d', 'e', 'f')
+    val list3 = List[Char]('g', 'h', 'i')
+    val result: List[Char] = concatAll(List(list1, list2, list3))
+    result should equal(List[Char]('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'))
+  }
 }
