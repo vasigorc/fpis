@@ -76,8 +76,8 @@ package object chapter03_datastructures {
    * Write a function map that generalizes modifying each element in a list while
    * maintaining the structure of the list.
    */
-  def map[A,B](as: List[A])(f: A => B): List[B] = {
-    foldRightViaFoldLeft(as, List[B]())((elem, acc) => f(elem)::acc)
+  def map[A, B](as: List[A])(f: A => B): List[B] = {
+    foldRightViaFoldLeft(as, List[B]())((elem, acc) => f(elem) :: acc)
   }
 
   /**
@@ -85,5 +85,19 @@ package object chapter03_datastructures {
    * Write a function flatMap that works like [[map()]] except that the function given will return
    * a list instead of a single result, and that list should be inserted into the final resulting list
    */
-  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = concatAll(map(as)(f))
+  def flatMap[A, B](as: List[A])(f: A => List[B]): List[B] = concatAll(map(as)(f))
+
+  /**
+   * Exercise 3.23
+   * Generalize the function you just wrote so that it's not specific to integers or addition. Name your generalized
+   * function zipWith
+   *
+   * @note the axis is the as param, the final list is only guaranteed to have values based on
+   *       its values
+   */
+  def zipWith[A, B, C](as: List[A], bs: List[B])(f: (A, B) => C): List[C] = (as, bs) match {
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+    case (h1::t1, h2::t2) => f(h1, h2)::zipWith(t1, t2)(f)
+  }
 }

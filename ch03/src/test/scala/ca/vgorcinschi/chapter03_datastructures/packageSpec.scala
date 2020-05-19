@@ -124,4 +124,21 @@ class packageSpec extends AnyFlatSpec with Matchers{
   it should "flatten the list after applied function" in {
     flatMap(List(1,2,3))(i => List(i, i)) should equal(List(1,1,2,2,3,3))
   }
+
+  behavior of "zipWith"
+
+  it should "add numbers at same index position from two lists and return result in another list" in {
+    zipWith(List(1, 2, 3), List(4, 5, 6))((a, b) => a + b) should equal(List(5, 7, 9))
+  }
+
+  it should "return empty list from (A, B) where A is a non-empty list and B is an empty list" in new NonEmptyCharListFixture {
+    zipWith(charList, List[Char]())((char1, char2) => char1 + char2) should equal(List[Char]())
+  }
+
+  it should "\"zip\" values of two different types into a list of a third type" in {
+    val chars = List[Char]('a', 'b', 'c')
+    val list = List.tabulate(5)(_ * 1)
+    val result = zipWith(chars, list)((c, i) => s"$i$c")
+    result should equal(List[String]("0a", "1b", "2c"))
+  }
 }
