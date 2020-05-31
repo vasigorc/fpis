@@ -141,4 +141,28 @@ class packageSpec extends AnyFlatSpec with Matchers{
     val result = zipWith(chars, list)((c, i) => s"$i$c")
     result should equal(List[String]("0a", "1b", "2c"))
   }
+
+  behavior of "kSubsequences"
+
+  it should "return a list of k subsequences for non empty char list" in new NonEmptyCharListFixture {
+    kSubsequences(charList, 3) should contain allElementsOf (List(
+      List('a', 'b', 'c'),
+      List('b', 'c', 'd'),
+      List('c', 'd', 'e'),
+      List('d', 'e', 'f'),
+      List('e', 'f', 'g'),
+      List('f', 'g', 'h'),
+      List('g', 'h', 'i')
+    ))
+  }
+
+  behavior of "hasSubsequence"
+
+  it should "return true if subsequence is contained" in new NonEmptyCharListFixture {
+    hasSubsequence(charList, List[Char]('d', 'e', 'f')) should be(true)
+  }
+
+  it should "return false if subsequence isn't contained" in new NonEmptyCharListFixture {
+    hasSubsequence(charList, List[Char]('s', 'z', 'x')) should be(false)
+  }
 }
