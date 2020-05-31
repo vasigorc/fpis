@@ -98,6 +98,38 @@ package object chapter03_datastructures {
   def zipWith[A, B, C](as: List[A], bs: List[B])(f: (A, B) => C): List[C] = (as, bs) match {
     case (Nil, _) => Nil
     case (_, Nil) => Nil
-    case (h1::t1, h2::t2) => f(h1, h2)::zipWith(t1, t2)(f)
+    case (h1 :: t1, h2 :: t2) => f(h1, h2) :: zipWith(t1, t2)(f)
+  }
+
+  /**
+   * Exercise 3.24 Implement [[hasSubsequence()]] for checking whether a List contais another
+   * List as a subsequence. For instance, List(1,2,3,4) would have List(1,2), List(2,3) and List(4)
+   * as subsequences, among others.
+   *
+   * @param targetList
+   * @param searchList
+   * @tparam A
+   * @return
+   */
+  def hasSubsequence[A](targetList: List[A], searchList: List[A]): Boolean = (targetList, searchList) match {
+    case (Nil, Nil) => true
+    case (_, Nil) => true
+    case (Nil, _) => false
+    case (_, _) => kSubsequences(targetList, searchList.size).contains(searchList)
+  }
+
+  /**
+   *
+   * @param list - target list
+   * @param k - windowSize
+   * @tparam A - type param of target list
+   * @return list of all subsequences of target list
+   */
+  def kSubsequences[A](list: List[A], k: Int): List[List[A]] = {
+    if (list.isEmpty || k > list.size) return Nil
+    // define from to limits
+    val (from, to) = (0, list.size - k)
+    foldLeftViaFoldRight((from to to).toList, List.empty[List[A]])((acc, offset) =>
+      list.slice(offset, offset + k) :: acc)
   }
 }
