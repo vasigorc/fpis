@@ -102,7 +102,7 @@ package object chapter03_datastructures {
   }
 
   /**
-   * Exercise 3.24 Implement [[hasSubsequence()]] for checking whether a List contais another
+   * Exercise 3.24 Implement [[hasSubsequence()]] for checking whether a List contains another
    * List as a subsequence. For instance, List(1,2,3,4) would have List(1,2), List(2,3) and List(4)
    * as subsequences, among others.
    *

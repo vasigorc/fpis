@@ -155,4 +155,14 @@ class packageSpec extends AnyFlatSpec with Matchers{
       List('g', 'h', 'i')
     ))
   }
+
+  behavior of "hasSubsequence"
+
+  it should "return true if subsequence is contained" in new NonEmptyCharListFixture {
+    hasSubsequence(charList, List[Char]('d', 'e', 'f')) should be(true)
+  }
+
+  it should "return false if subsequence isn't contained" in new NonEmptyCharListFixture {
+    hasSubsequence(charList, List[Char]('s', 'z', 'x')) should be(false)
+  }
 }
