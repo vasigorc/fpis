@@ -1,8 +1,8 @@
-package ca.vgorcinschi
+package ca.vgorcinschi.chapter03_datastructures
 
 import scala.annotation.tailrec
 
-package object chapter03_datastructures {
+package object lists {
 
   def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
     case Nil => z

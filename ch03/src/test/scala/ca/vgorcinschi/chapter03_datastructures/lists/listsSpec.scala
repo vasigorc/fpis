@@ -1,9 +1,9 @@
-package ca.vgorcinschi.chapter03_datastructures
+package ca.vgorcinschi.chapter03_datastructures.lists
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
-class packageSpec extends AnyFlatSpec with Matchers{
+class listsSpec extends AnyFlatSpec with Matchers{
 
   trait NonEmptyCharListFixture {
     val charList: List[Char] = List[Char]('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i')
@@ -16,15 +16,15 @@ class packageSpec extends AnyFlatSpec with Matchers{
   behavior of "length"
 
   it should "return 0 for Nil" in {
-    ca.vgorcinschi.chapter03_datastructures.length(Nil) should equal(0)
+    ca.vgorcinschi.chapter03_datastructures.lists.length(Nil) should equal(0)
   }
 
   it should "return 0 for an empty list" in new EmptyCharListFixture {
-    ca.vgorcinschi.chapter03_datastructures.length(charList) should equal(0)
+    ca.vgorcinschi.chapter03_datastructures.lists.length(charList) should equal(0)
   }
 
   it should "return right number of entries in a list" in new NonEmptyCharListFixture {
-    ca.vgorcinschi.chapter03_datastructures.length(charList) should equal(charList.size)
+    ca.vgorcinschi.chapter03_datastructures.lists.length(charList) should equal(charList.size)
   }
 
   behavior of "foldLeft"
