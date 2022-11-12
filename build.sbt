@@ -1,5 +1,5 @@
 ThisBuild / organization := "ca.vgorcinschi"
-ThisBuild / scalaVersion := "2.13.1"
+ThisBuild / scalaVersion := "2.13.10"
 
 name := "fpis"
 
