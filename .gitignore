@@ -2,12 +2,15 @@
 *.iml
 **/.idea
 
+# bsp
+.bsp
+
 # any targets
 **/target
 
 # ignore .travis.yml
 .travis.yml
-.gitignore
+.gitignore1
 .directory
 
 # ignore eclipse files
