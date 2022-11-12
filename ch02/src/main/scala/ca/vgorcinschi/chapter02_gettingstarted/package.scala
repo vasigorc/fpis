@@ -12,7 +12,7 @@ package object chapter02_gettingstarted {
 
     @scala.annotation.tailrec
     def loop(head: A, remainder: Array[A]): Boolean = remainder match {
-      case Array() => true
+      case Array()      => true
       case Array(x, _*) => if (ordered(head, x)) loop(x, remainder.tail) else false
     }
 
@@ -28,5 +28,5 @@ package object chapter02_gettingstarted {
   def uncurry[A, B, C](f: A => B => C): (A, B) => C = (a, b) => f(a)(b)
 
   // Exercise 2.5 Implement the higher-order function that composes two functions
-  def compose[A,B,C](f: B => C, g: A => B): A => C = a => f(g(a))
+  def compose[A, B, C](f: B => C, g: A => B): A => C = a => f(g(a))
 }

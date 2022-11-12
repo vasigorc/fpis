@@ -3,7 +3,7 @@ package ca.vgorcinschi.chapter03_datastructures.lists
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
-class listsSpec extends AnyFlatSpec with Matchers{
+class listsSpec extends AnyFlatSpec with Matchers {
 
   trait NonEmptyCharListFixture {
     val charList: List[Char] = List[Char]('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i')
@@ -38,9 +38,9 @@ class listsSpec extends AnyFlatSpec with Matchers{
   }
 
   /**
-   * @note that invoking [[foldRight()]] on the same
-   *       input does throw a [[StackOverflowError]]
-   */
+    * @note
+    *   that invoking [[foldRight()]] on the same input does throw a [[StackOverflowError]]
+    */
   it should "not throw StackOverFlow for a large passed-in list" in {
     val largeList = List.fill(1_000_000)(0.toByte)
     foldLeft(largeList, 1)(_ & _) should equal(0)
@@ -81,9 +81,9 @@ class listsSpec extends AnyFlatSpec with Matchers{
   }
 
   /**
-   * @note that invoking [[foldRight()]] on the same
-   *       input does throw a [[StackOverflowError]]
-   */
+    * @note
+    *   that invoking [[foldRight()]] on the same input does throw a [[StackOverflowError]]
+    */
   it should "not throw StackOverFlow for a large passed-in list" in {
     val largeList = List.fill(1_000_000)(0.toByte)
     foldRightViaFoldLeft(largeList, 1)(_ & _) should equal(0)
@@ -122,7 +122,7 @@ class listsSpec extends AnyFlatSpec with Matchers{
   behavior of "flatMap"
 
   it should "flatten the list after applied function" in {
-    flatMap(List(1,2,3))(i => List(i, i)) should equal(List(1,1,2,2,3,3))
+    flatMap(List(1, 2, 3))(i => List(i, i)) should equal(List(1, 1, 2, 2, 3, 3))
   }
 
   behavior of "zipWith"
