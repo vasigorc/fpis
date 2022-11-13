@@ -10,5 +10,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Formatting test
+      - name: Configure global.sbt
+        run: |
+          mkdir -p  ~/.sbt/1.0
+          touch  ~/.sbt/1.0/global.sbt
+          echo 'resolvers += "Artima Maven Repository" at "https://repo.artima.com/releases"' >> ~/.sbt/1.0/global.sbt
+      - name: Formatting
         run: sbt scalafmtCheckAll
