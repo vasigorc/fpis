@@ -14,6 +14,21 @@ sealed trait Tree[+A] {
     * Exercise 3.27 Write a function depth that returns the maximum path length from the root of a tree to any leaf.
     */
   def depth: Int
+
+  /**
+    * Exercise 3.28 Write a function `map`, analogous to the method of the same name on List, that modifies each element
+    * in a tree with a given function
+    * @param f
+    *   the function that modifies a value
+    * @tparam B
+    *   new type, after application of `f`
+    * @return
+    *   a new Tree with all values of the old Tree mapped
+    */
+  def map[B](f: A => B): Tree[B] = this match {
+    case Leaf(value)         => Leaf(f(value))
+    case Branch(left, right) => Branch(left.map(f), right.map(f))
+  }
 }
 case class Leaf[A](value: A) extends Tree[A] {
   override val size: Int = 1
