@@ -41,11 +41,11 @@ case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A] {
       *   [[Eval]] instance containing the longest depth of a branch
       */
     def depthHelper(branch: Tree[A]): Eval[Int] = branch match {
-      case Leaf(_) => Eval.One
+      case l @ Leaf(_) => Eval.now(l.depth)
       case Branch(left, right) =>
         for {
-          resultLeft <- Eval.defer(depthHelper(left).map(_ + 1))
-          resultRight <- Eval.defer(depthHelper(right).map(_ + 1))
+          resultLeft <- Eval.defer(depthHelper(left)) map (_ + 1)
+          resultRight <- Eval.defer(depthHelper(right)).map(_ + 1)
         } yield math.max(resultRight, resultLeft)
     }
 

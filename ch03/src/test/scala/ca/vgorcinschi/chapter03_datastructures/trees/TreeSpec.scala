@@ -19,6 +19,12 @@ class TreeSpec extends AnyFlatSpec with Matchers {
 
     intTree.maximum should be(maxValue)
   }
+
+  behavior of "depth"
+
+  it should "correctly identify the depth of a tree" in new NonEmptyIntTree {
+    intTree.depth should be(7)
+  }
 }
 
 object TreeSpec {
