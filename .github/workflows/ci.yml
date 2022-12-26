@@ -17,3 +17,24 @@ jobs:
           echo 'resolvers += "Artima Maven Repository" at "https://repo.artima.com/releases"' >> ~/.sbt/1.0/global.sbt
       - name: Formatting
         run: sbt scalafmtCheckAll
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Configure git
+        run: "git config --global core.autocrlf false"
+        shell: bash
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Configure global.sbt
+        run: |
+          mkdir -p  ~/.sbt/1.0
+          touch  ~/.sbt/1.0/global.sbt
+          echo 'resolvers += "Artima Maven Repository" at "https://repo.artima.com/releases"' >> ~/.sbt/1.0/global.sbt
+      - name: Setup Scala
+        uses: olafurpg/setup-scala@v11
+        with:
+          java-version: openjdk@1.11
+      - name: Build and Test
+        run: sbt -v +test
